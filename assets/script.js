@@ -1,35 +1,46 @@
+//get cityname from search input value
+var cityName = document.querySelector("#city-input").value
+
+//api key
+var apiKey = "eb7b907aaf0cbad063ad71c08ba628dc"
+
+//date
+var date = moment().format('MM/DD/YYYY')
+
+
+
+
 function displayTodaysWeather(cityName) {
-    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=eb7b907aaf0cbad063ad71c08ba628dc`)
+   var todaysWeatherEl = document.querySelector("#todays-weather")
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}`)
     .then(function(response) {
         return response.json();
       })
       .then(function(data) {
-        document.querySelector("#todays-weather").innerHTML = `
-        <h2>${data.name}</h2>
-        <h2>Date: 11/21/2020</h2>
-        <h3>Temperature: ${data.main.temp} F </h3>
-        <h3>Humidity: 20%</h3>
-        <h3>Wind Speed:4.7 mph</h3>
-        <h3>UV Index:9.49</h3>`
+        todaysWeatherEl.innerHTML = `
+        <h3>${data.name}, ${date}</h2>
+        <h3>Temperature: ${data.main.temp} F </h2>
+        <h3>Humidity: ${data.main.humidity}%</h2>
+        <h3>Wind Speed: ${data.wind.speed} mph</h2>
+       `
+      
         console.log(data)
      
+        var latitude = data.coord.lat
+        var long = data.coord.lon
 
-      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${data.coord.lat}&lon=${data.coord.lon}&exclude={part}&appid=eb7b907aaf0cbad063ad71c08ba628dc`)
+      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${long}&exclude=minutely,alerts&appid=${apiKey}`)
       .then(function(response) {
         return response.json();
-      })
-      .then(function(response) {
-        if (response.data.length === 0) {
-          console.log('open weather map could not find anything for that.');
-        } else {
-          console.log(response.data[0]);
-          var responseContainerEl = document.querySelector('#response-container');
-          responseContainerEl.innerHTML = '';
-          var gifImg = document.createElement('img');
-          gifImg.setAttribute('src', response.data[0].images.fixed_height.url);
-          responseContainerEl.appendChild(gifImg);
-        }
-      });
+        
+        })
+        .then(function(data){
+         
+            
+           //enter some code here that will append UVI to todaysWeatherEl
+          
+            console.log(data);
+        })      
     })
 }
 

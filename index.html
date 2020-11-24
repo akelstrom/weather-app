@@ -6,31 +6,35 @@
     <title>Weather</title>
   </head>
   <body>
-      <header>
-          <h1>Weather Dashboard</h1>
-      </header>
+    <header>
+      <h1>Weather Dashboard</h1>
+    </header>
     <main>
       <div>
         <h2>Search for a city:</h2>
         <label for="city"></label>
-        <input type="text" id="city-input" name="city-input">
-        <button id="submit-btn"></button>
+        <input type="text" id="city-input" name="city-input" />
+        <button id="submit-btn">icon goes here</button>
       </div>
 
       <div id="todays-weather">
-          <!-- data from displayTodaysWeather goes here -->
+        <!-- data from displayTodaysWeather goes here -->
       </div>
 
-      <div>
+      <div id="week-weather">
+        <!-- data for 5 day forecast goes here  -->
         <h2>5 Day Forecast</h2>
-        <div id="week weather">
+        <div>
           <h3>11/21/2020</h3>
-          <img src="" />
+          <h3>icon goes here</h3>
           <h3>Temp: F</h3>
           <h3>Humidity: %</h3>
         </div>
       </div>
     </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <script src="assets/script.js"></script>
   </body>
 </html>
