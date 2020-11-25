@@ -38,10 +38,11 @@ function displayTodaysWeather(cityName) {
     })
     .then(function (data) {
       todaysWeatherEl.innerHTML = `
-        <h2>${data.name}, ${date}</h2>
-        <h3>Temperature: ${data.main.temp} F </h3>
-        <h3>Humidity: ${data.main.humidity}%</h3>
-        <h3>Wind Speed: ${data.wind.speed} mph</h3>
+        <h3>${data.name} (${date})</h3>
+        <p>Temperature: ${data.main.temp} F </p>
+        <p>Humidity: ${data.main.humidity}%</p>
+        <p>Wind Speed: ${data.wind.speed} mph</p>
+        
        `;
       console.log(data);
 
@@ -55,9 +56,12 @@ function displayTodaysWeather(cityName) {
           return response.json();
         })
         .then(function (data2) {
-          var indexEl = document.querySelector("#uv-index");
-          indexEl.innerHTML = `<h3>UV Index: ${data2.current.uvi} <h3>`;
+          // var indexEl = document.querySelector("#uv-index");
+          todaysWeatherEl.innerHTML += `<p>UV Index: ${data2.current.uvi}</p>`;
           console.log(data2);
         });
     });
+
+    //function to display 5 day weather
+    
 }

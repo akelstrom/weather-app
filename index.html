@@ -8,31 +8,42 @@
     <link rel="stylesheet" href="assets/style.css">
   </head>
   <body>
-    <header>
-      <h1>Weather Dashboard</h1>
+    <header class="bg-dark">
+      <h1 class="text-light">Weather Dashboard</h1>
     </header>
     <main>
     <div class="row">
       <div class="col-4 bg-light" id="left-container">
-        <h5>Search for a city:</h5>
-        <input class="form-control form-control-sm" type="text" id="city-input" placeholder="Enter City Name">
-        <button id="submit-btn">submit</button>
+        <h5 class="text-dark">Search for a city:</h5>
+        <form class="form-inline my-2">
+        <input class="form-control" type="text" id="city-input" placeholder="Enter City Name">
+        <button class="btn btn-primary my-2 my-sm-0 " id="submit-btn">
+            <svg class= "white" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-search" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+            <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+          </svg>
+        </button>
+        </form> 
+        <br>
         <ul class="list-group">
             <li class="list-group-item">Cras justo odio</li>
             <li class="list-group-item">Dapibus ac facilisis in</li>
             <li class="list-group-item">Morbi leo risus</li>
             <li class="list-group-item">Porta ac consectetur ac</li>
             <li class="list-group-item">Vestibulum at eros</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+            <li class="list-group-item">Vestibulum at eros</li>
           </ul>
+
       </div>
 
-      <div class="col-8 bg-light" id="todays-weather">
+      <div class="col-8  card" id="todays-weather">
         <!-- data from displayTodaysWeather goes here -->
       </div>
-      <!-- data from 2nd api key to get ui index -->
-      <div class="col-8 bg-light" id="uv-index"></div>
-    
+
     </div>
+    <!-- end row -->
 
       <div id="week-weather">
         <!-- data for 5 day forecast goes here  -->
