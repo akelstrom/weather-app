@@ -24,6 +24,7 @@ submitButtonEl.addEventListener("click", function (event) {
     .then(function (data) {
       console.log(data);
       displayTodaysWeather(cityName);
+      fiveDayDisplay(cityName)
     });
 });
 
@@ -49,6 +50,7 @@ function displayTodaysWeather(cityName) {
       var latitude = data.coord.lat;
       var long = data.coord.lon;
 
+      //need to fetch call a different API to get the UI index, this API uses lat and long rather than city name
       fetch(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${long}&exclude=minutely,alerts&appid=${apiKey}`
       )
@@ -62,6 +64,37 @@ function displayTodaysWeather(cityName) {
         });
     });
 
-    //function to display 5 day weather
-    
 }
+
+
+    //function to display 5 day weather
+    function fiveDayDisplay(cityName) {
+      
+      fetch(
+        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}`
+      )
+      .then(function (response) {
+        return response.json()
+      })
+      .then(function (data){
+        console.log(data);
+     
+      
+      var latitude = data.coord.lat;
+      var long = data.coord.lon;
+
+      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${long}&exclude=minutely,alerts&units=imperial&appid=${apiKey}`)
+
+      .then(function (response){
+        return response.json()
+      })
+      .then(function (data3){
+        console.log(data3);
+        console.log(data3.daily[4]);
+        for (var i = 0; i < data3.daily[i]; i++) {
+
+        }
+        
+      })
+    })
+    }
