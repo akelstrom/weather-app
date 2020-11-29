@@ -15,17 +15,8 @@ submitButtonEl.addEventListener("click", function (event) {
   var cityName = document.querySelector("#city-input").value.trim();
   console.log(cityName);
 
-  fetch(
-    `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}`
-  )
-    .then(function (response) {
-      return response.json();
-    })
-    .then(function (data) {
-      console.log(data);
-      displayTodaysWeather(cityName);
-      fiveDayDisplay(cityName)
-    });
+  displayTodaysWeather(cityName);
+  fiveDayDisplay(cityName);
 });
 
 //function to display todays weather
@@ -50,6 +41,7 @@ function displayTodaysWeather(cityName) {
       var latitude = data.coord.lat;
       var long = data.coord.lon;
 
+      fiveDayDisplay(latitude,long);
       //need to fetch call a different API to get the UI index, this API uses lat and long rather than city name
       fetch(
         `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${long}&exclude=minutely,alerts&appid=${apiKey}`
@@ -60,41 +52,33 @@ function displayTodaysWeather(cityName) {
         .then(function (data2) {
           // var indexEl = document.querySelector("#uv-index");
           todaysWeatherEl.innerHTML += `<p>UV Index: ${data2.current.uvi}</p>`;
-          console.log(data2);
+          console.log(data2.current.uvi);
         });
     });
-
 }
 
-
-    //function to display 5 day weather
-    function fiveDayDisplay(cityName) {
-      
-      fetch(
-        `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}`
+//function to display 5 day weather
+function fiveDayDisplay(lat,lon) {
+  
+     fetch(
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&units=imperial&appid=${apiKey}`
       )
-      .then(function (response) {
-        return response.json()
-      })
-      .then(function (data){
-        console.log(data);
-     
-      
-      var latitude = data.coord.lat;
-      var long = data.coord.lon;
-
-      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${long}&exclude=minutely,alerts&units=imperial&appid=${apiKey}`)
-
-      .then(function (response){
-        return response.json()
-      })
-      .then(function (data3){
-        console.log(data3);
-        console.log(data3.daily[4]);
-        for (var i = 0; i < data3.daily[i]; i++) {
-
-        }
-        
-      })
-    })
-    }
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          console.log("5 day",data);
+          for (var i = 1; i < 6; i++) {
+            console.log(data.daily[i])
+            //use inner html to display 5 day forecast
+            document.querySelector("#week-weather").innerHTML +=   `
+            <div class="col-2">
+            <h4>${moment.unix(data.daily[i].dt).format("MM/DD/YYYY")} </h4>
+            <h6> <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" /> </h6>
+            <h6>temp:</h6>
+            <h6>humidity:</h6>
+          </div>`
+          }
+        });
+  
+}
