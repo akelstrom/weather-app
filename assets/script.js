@@ -38,13 +38,13 @@ function displayTodaysWeather(cityName) {
        `;
       console.log(data);
 
-      var latitude = data.coord.lat;
-      var long = data.coord.lon;
+      var lat = data.coord.lat;
+      var lon = data.coord.lon;
 
-      fiveDayDisplay(latitude,long);
+      fiveDayDisplay(lat,lon);
       //need to fetch call a different API to get the UI index, this API uses lat and long rather than city name
       fetch(
-        `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${long}&exclude=minutely,alerts&appid=${apiKey}`
+        `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,alerts&appid=${apiKey}`
       )
         .then(function (response) {
           return response.json();
@@ -52,7 +52,6 @@ function displayTodaysWeather(cityName) {
         .then(function (data2) {
           // var indexEl = document.querySelector("#uv-index");
           todaysWeatherEl.innerHTML += `<p>UV Index: ${data2.current.uvi}</p>`;
-          console.log(data2.current.uvi);
         });
     });
 }
@@ -72,12 +71,14 @@ function fiveDayDisplay(lat,lon) {
             console.log(data.daily[i])
             //use inner html to display 5 day forecast
             document.querySelector("#week-weather").innerHTML +=   `
-            <div class="col-2">
-            <h4>${moment.unix(data.daily[i].dt).format("MM/DD/YYYY")} </h4>
-            <h6> <img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" /> </h6>
-            <h6>temp:</h6>
-            <h6>humidity:</h6>
-          </div>`
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+              <div class="card-header">${moment.unix(data.daily[i].dt).format("MM/DD/YYYY")} </div>
+              <div class="card-body">
+              <h5 class="card-title"><img src="http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png" /> </h5>
+              <p class= "card-text"> Temp: ${data.daily[i].temp.day}</p>
+              <p class= "card-text"> Humidity: ${data.daily[i].humidity}</p>
+                </div>
+              `
           }
         });
   
