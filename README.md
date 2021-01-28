@@ -4,11 +4,11 @@
 An app that when the user types in a city, then the current weather, and 5 day forcast is displayed.
 
 ## Tech Used:
-*HTML
-*JavaScript
-*Bootstrap
-*CSS
-*Open Weather API
+* HTML
+* JavaScript
+* Bootstrap
+* CSS
+* Open Weather API
 
 ## Link to Live URL
 [LINK](https://akelstrom.github.io/weather-app/.)
