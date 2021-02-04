@@ -1,7 +1,7 @@
 # Weather App
 
 ## Description
-An app that when the user types in a city, then the current weather, and 5 day forcast is displayed.
+Used OpenWeather API to retrieve weather data for cities for this weather dashboard app that runs in the browser and features dynamically updated HTML and CSS.
 
 ## Tech Used:
 * HTML
