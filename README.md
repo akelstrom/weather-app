@@ -1,7 +1,7 @@
 # Weather App
 
 ## Description
-Used OpenWeather API to retrieve weather data for cities for this weather dashboard app that runs in the browser and features dynamically updated HTML and CSS.
+For this application I used OpenWeather API to retrieve weather data for cities for this weather dashboard app that runs in the browser and features dynamically updated HTML and CSS.
 
 ## Tech Used:
 * HTML
